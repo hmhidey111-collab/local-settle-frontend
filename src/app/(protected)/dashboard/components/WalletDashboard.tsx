@@ -21,7 +21,7 @@ const SECONDARY_ACTIONS = [
 
 export function WalletDashboard() {
     const { publicKey } = useWallet();
-    const { viewModel, isLoading, isFetching, lastUpdatedAt, error, retry } = useWalletBalanceViewModel(publicKey);
+    const { viewModel, isLoading, isFetching, lastUpdatedAt, error, isStale, retry } = useWalletBalanceViewModel(publicKey);
     const [cooldownUntil, setCooldownUntil] = useState(0);
     const [now, setNow] = useState(Date.now());
     useEffect(() => {
@@ -112,6 +112,7 @@ export function WalletDashboard() {
                         currency={viewModel.currency}
                         isLoading={isLoading}
                         error={error}
+                        isStale={isStale}
                         onRetry={retry}
                         actions={actions}
                     />
@@ -120,6 +121,7 @@ export function WalletDashboard() {
                         assets={viewModel.assets}
                         isLoading={isLoading}
                         error={error}
+                        isStale={isStale}
                         onRetry={retry}
                     />
                 </div>
